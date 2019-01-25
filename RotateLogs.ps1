@@ -1,6 +1,9 @@
 ﻿<#
     .SYNOPSIS
     Script for rotating files older than x days defaults to 7 days.
+    Can be automated daily or whenever in a number of ways and should also run on linux with powerShell 6 installed.
+    1.  Windows Task Scheduler
+    2.  Automation pipeline e.g. Ansible, Chef, Puppet, vsts pipeline etc.
 #>
 
 param
