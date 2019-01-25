@@ -1,4 +1,7 @@
-﻿# trap all errors and terminate since we have no means of recovery
+﻿# Enable verbose logging
+$VerbosePreference = "Continue"
+
+# trap all errors and terminate since we have no means of recovery
 trap { "An Error Occurred Terminating the Script: $_"; break }
 
 # Force .Net to use TLSv1.2
@@ -19,7 +22,7 @@ $mySQLCommunityMSI = Join-Path $env:temp $mysqlInstaller
 
 # Download required file
 $finalDownloadLink = (Invoke-WebRequest -Uri ("{0}{1}" -f $mysqlBaseURI,$downloadLink)).Links | ? innerHTML -like "No thanks*" | Select -ExpandProperty hRef
-Invoke-WebRequest -Uri ("{0}{1}" -f $mysqlBaseURI,$finalDownloadLink) -OutFile $mySQLCommunityMSI -UseBasicParsing -Verbose
+Invoke-WebRequest -Uri ("{0}{1}" -f $mysqlBaseURI,$finalDownloadLink) -OutFile $mySQLCommunityMSI -UseBasicParsing
 
 # Test File Hash against downloaded verifiable hash
 $md5 = (Get-FileHash -Algorithm MD5 -LiteralPath $mySQLCommunityMSI -Verbose).Hash.tolower()
